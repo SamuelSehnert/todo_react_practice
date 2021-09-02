@@ -5,7 +5,6 @@ const EditTask = ({saveTaskAndExit, taskData}) => {
     const [newTask, setNewTask] = useState(taskData);
 
     const saveData = () => {
-
         saveTaskAndExit(newTask)
     }
 
@@ -14,7 +13,6 @@ const EditTask = ({saveTaskAndExit, taskData}) => {
             ...newTask,
             [e.target.name]: e.target.value,
         })
-        // console.log(newTask)
     }
 
     return(
@@ -29,7 +27,7 @@ const EditTask = ({saveTaskAndExit, taskData}) => {
             </div>
             <div>
                 <label>Move Task </label>
-                <select>
+                <select id='section-select' name='sectionID' defaultValue={taskData.sectionID} onChange={updateTaskData}>
                     <option value='not-started'>Not Started</option>
                     <option value='in-progress'>In Progress</option>
                     <option value='complete'>Complete</option>

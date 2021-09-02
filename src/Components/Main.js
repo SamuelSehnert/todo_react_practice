@@ -16,6 +16,7 @@ const Main = () => {
     function handleShowEditTask(){
         setShowEditTask(!showEditTask)
     }
+
     function saveTaskAndExit(newTask){
         allData.ungroupedTasks.forEach( task => {
             if (task.taskID === newTask.taskID){
