@@ -16,6 +16,17 @@ const Main = () => {
     function handleShowEditTask(){
         setShowEditTask(!showEditTask)
     }
+    function saveTaskAndExit(newTask){
+        allData.ungroupedTasks.forEach( task => {
+            if (task.taskID === newTask.taskID){
+                task.title = newTask.title;
+                task.context = newTask.context;
+                task.sectionID = newTask.sectionID;
+                task.groupID = newTask.groupID;
+            }
+        })
+        handleShowEditTask();
+    }
     //sets task and then shows popup
     //called in Task.js
     function handleSelectedTask(task){
@@ -25,7 +36,7 @@ const Main = () => {
 
     const renderDisplay = (showEditTask) => {
         if (showEditTask){
-            return <EditTask handleShowEditTask={handleShowEditTask} taskData={selectedTask}/> 
+            return <EditTask saveTaskAndExit={saveTaskAndExit} taskData={selectedTask}/> 
         }
         else{
             return (
