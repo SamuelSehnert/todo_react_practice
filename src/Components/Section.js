@@ -6,15 +6,15 @@ import Task from './Task'
  *      data -> JSON object
  */
 
-const Section = ({data, id}) => {
+const Section = ({handleSelectedTask, data, stringData}) => {
 
     return(
         <div>
-            <h1>{id}</h1>
-            <div>
+            <h1>{stringData.title}</h1>
+            <div className='ungroupedTasks'>
             {data.ungroupedTasks.map( task => {
-                if (task.sectionID === id) {
-                    return <Task key={task.taskID} taskData={task}/>
+                if (task.sectionID === stringData.id) {
+                    return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
                 }
                 else {
                     return null

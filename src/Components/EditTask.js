@@ -1,17 +1,26 @@
 import React from 'react';
 
-const EditTask = ({taskData}) => {
+const EditTask = ({handleShowEditTask, taskData}) => {
 
     return(
         <div>
-            <span>
+            <div>
                 Title
                 <input type='text' name='task-title'/>
-            </span>
-            <span>
+            </div>
+            <div>
                 Context
                 <input type='text' name='task-context'/>
-            </span>
+            </div>
+            <div>
+                <label>Move Task </label>
+                <select>
+                    <option value='not-started'>Not Started</option>
+                    <option value='in-progress'>In Progress</option>
+                    <option value='complete'>Complete</option>
+                </select>
+            </div>
+            <button onClick={() => handleShowEditTask()}>Save & Close</button>
         </div>
     );
 }

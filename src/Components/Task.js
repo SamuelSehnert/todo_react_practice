@@ -1,16 +1,16 @@
 import React from 'react';
 
-const Task = ({taskData}) => {
+const Task = ({handleSelectedTask, taskData}) => {
 
     function showEditPopup(){
-        //want to allow user to edit task
-        console.log("taskID = " + taskData.taskID)
+        handleSelectedTask(taskData) //calls back to main and displays the edit Task
     }
 
     return(
         <div onClick={() => showEditPopup()}>
             <strong>{taskData.title}</strong>
             <div>{taskData.context}</div>
+            <br/>
         </div>
     );
 }
