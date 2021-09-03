@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import Section from './Section';
-import { uniqueId } from 'lodash';
-import EditTask from './EditTask';
+import React, {useState} from 'react'
+import { uniqueId } from 'lodash'
+import Section from './Section'
+import EditTask from './EditTask'
 
 const Main = () => {
 
@@ -23,7 +23,7 @@ const Main = () => {
                 task.groupID = newTask.groupID;
             }
             else if (task.taskID === newTask.taskID && mode === 1){ //deleting a task
-                allData.splice(allData.indexOf(newTask), 1)
+                allData.splice(allData.indexOf(newTask), 1);
             }
         })
         handleShowEditTask();
@@ -64,9 +64,9 @@ const Main = () => {
     }
 
     return(
-        <div>
+        <span>
             {renderDisplay(showEditTask)}
-        </div>
+        </span>
     );
 }
 

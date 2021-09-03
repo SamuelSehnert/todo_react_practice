@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const Group = ({data}) => {
+const Group = ({groupData}) => {
 
     return(
-        <div>{data.groupTitle}</div>
+        <div>
+            <h2><strong>{groupData.title}</strong></h2>
+        </div>
     );
 }
 
