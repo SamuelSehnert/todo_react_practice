@@ -12,7 +12,7 @@ const Section = ({handleSelectedTask, data, stringData}) => {
         <div>
             <h1>{stringData.title}</h1>
             <div className='ungroupedTasks'>
-            {data.ungroupedTasks.map( task => {
+            {data.map( task => {
                 if (task.sectionID === stringData.id) {
                     return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
                 }

@@ -5,10 +5,7 @@ import EditTask from './EditTask';
 
 const Main = () => {
 
-    const [allData, setData] = useState({ 
-        groups: [], //groups of tasks
-        ungroupedTasks: [] //ungrouped tasks
-    });
+    const [allData, setData] = useState([]);
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
 
@@ -18,7 +15,7 @@ const Main = () => {
     }
 
     function saveTaskAndExit(newTask){
-        allData.ungroupedTasks.forEach( task => {
+        allData.forEach( task => {
             if (task.taskID === newTask.taskID){
                 task.title = newTask.title;
                 task.context = newTask.context;
@@ -52,16 +49,15 @@ const Main = () => {
     }
 
     function createTask(){
-        setData({   
-            groups: [...allData.groups],
-            ungroupedTasks: [...allData.ungroupedTasks, {
+        setData([...allData, {
                 taskID: uniqueId(),
                 title: 'Unnamed', //title of task
                 context: 'No Text', //text of task
                 sectionID: 'not-started', //section task is in. Default to 'not-started'
                 groupID: null,
-                timeStamp: null,}]
-        })
+                timeStamp: null,}
+            ]
+        )
     }
 
     return(
