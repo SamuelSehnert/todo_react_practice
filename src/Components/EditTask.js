@@ -4,6 +4,10 @@ const EditTask = ({ExitEditTask, taskData}) => {
 
     const [newTask, setNewTask] = useState(taskData);
 
+    const [newGroup, setNewGroup] = useState('');
+    const [groups, setGroups] = useState([]);
+    const [showNewGroupForm, setShowNewGroupForm] = useState(false);
+
     const saveData = () => {
         ExitEditTask(newTask, 0)
     }
@@ -17,6 +21,41 @@ const EditTask = ({ExitEditTask, taskData}) => {
             ...newTask,
             [e.target.name]: e.target.value,
         })
+    }
+
+    const updateGroupData = e => {
+        setNewGroup(e.target.value)
+    }
+
+    const saveGroupData = () => {
+        setGroups([...groups, newGroup])
+    }
+
+    function showGroupForm(showNewGroupForm){
+        if (showNewGroupForm){
+            return (
+                <span>
+                    <input type='text' name='groupID' onChange={updateGroupData} />
+                    <button onClick={() => saveGroupData()}>Save Group</button>
+                </span>)
+        }
+        else{
+            return
+        }
+    }
+
+    function messageString(string){
+        var retString = '';
+        for (let i = 0; i < string.length; i++) {
+            const element = string[i];
+            if (element === ' '){
+                retString += '-'
+            }
+            else{
+                retString += element.toLowerCase();
+            }
+        }
+        return retString;
     }
 
     return(
@@ -36,6 +75,17 @@ const EditTask = ({ExitEditTask, taskData}) => {
                     <option value='in-progress'>In Progress</option>
                     <option value='complete'>Complete</option>
                 </select>
+            </div>
+            <div>
+                <label>Change Group </label>
+                <select id='section-select' name='groupID' defaultValue={taskData.groupID} onChange={updateTaskData}>
+                    <option value={null}>Ungrouped</option>
+                    {groups.map(group => {
+                        return <option key={messageString(group)} value={messageString(group)}>{group}</option>
+                    })}
+                </select>
+                <button onClick={() => setShowNewGroupForm(!showNewGroupForm)}>New Group</button>
+                {showGroupForm(showNewGroupForm)}
             </div>
             <button onClick={() => saveData()}>Save & Close</button>
             <button onClick={() => deleteData()}>Delete Task</button>

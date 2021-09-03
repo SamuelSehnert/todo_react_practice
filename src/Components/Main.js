@@ -5,7 +5,7 @@ import EditTask from './EditTask'
 
 const Main = () => {
 
-    const [allData, setData] = useState([]);
+    const [tasks, setTasks] = useState([]);
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
 
@@ -15,7 +15,7 @@ const Main = () => {
     }
 
     function ExitEditTask(newTask, mode){
-        allData.forEach( task => {
+        tasks.forEach( task => {
             if (task.taskID === newTask.taskID && mode === 0){ //saving a task
                 task.title = newTask.title;
                 task.context = newTask.context;
@@ -23,7 +23,7 @@ const Main = () => {
                 task.groupID = newTask.groupID;
             }
             else if (task.taskID === newTask.taskID && mode === 1){ //deleting a task
-                allData.splice(allData.indexOf(newTask), 1);
+                tasks.splice(tasks.indexOf(newTask), 1);
             }
         })
         handleShowEditTask();
@@ -42,9 +42,9 @@ const Main = () => {
         else{
             return (
                 <div>
-                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={allData}></Section>
-                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={allData}></Section>
-                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={allData}></Section>
+                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section>
+                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section>
+                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section>
                     <button onClick={() => createTask()}>New Task</button>
                 </div>
             )
@@ -52,7 +52,7 @@ const Main = () => {
     }
 
     function createTask(){
-        setData([...allData, {
+        setTasks([...tasks, {
                 taskID: uniqueId(),
                 title: 'Unnamed', //title of task
                 context: 'No Text', //text of task

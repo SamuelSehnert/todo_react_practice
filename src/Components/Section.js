@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Task from './Task'
-import Group from './Group'
 
 /* This for the the NOT STARTED, IN PROGRESS, and DONE section
  * Inputs:
@@ -8,14 +7,6 @@ import Group from './Group'
  */
 
 const Section = ({handleSelectedTask, data, stringData}) => {
-
-    const [groups, setGroups] = useState([])
-    /* 
-        {
-            groupID: string
-            tasks: []
-        }
-     */
 
     return(
         <div>
