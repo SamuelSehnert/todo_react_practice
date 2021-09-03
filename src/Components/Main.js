@@ -16,13 +16,13 @@ const Main = () => {
 
     function ExitEditTask(newTask, mode){
         allData.forEach( task => {
-            if (task.taskID === newTask.taskID && mode === 0){
+            if (task.taskID === newTask.taskID && mode === 0){ //saving a task
                 task.title = newTask.title;
                 task.context = newTask.context;
                 task.sectionID = newTask.sectionID;
                 task.groupID = newTask.groupID;
             }
-            else if (task.taskID === newTask.taskID && mode === 1){
+            else if (task.taskID === newTask.taskID && mode === 1){ //deleting a task
                 allData.splice(allData.indexOf(newTask), 1)
             }
         })
