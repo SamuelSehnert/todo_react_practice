@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 
-const EditTask = ({saveTaskAndExit, taskData}) => {
+const EditTask = ({ExitEditTask, taskData}) => {
 
     const [newTask, setNewTask] = useState(taskData);
 
     const saveData = () => {
-        saveTaskAndExit(newTask)
+        ExitEditTask(newTask, 0)
+    }
+
+    const deleteData = () => {
+        ExitEditTask(newTask, 1)
     }
 
     const updateTaskData = e => {
@@ -34,6 +38,7 @@ const EditTask = ({saveTaskAndExit, taskData}) => {
                 </select>
             </div>
             <button onClick={() => saveData()}>Save & Close</button>
+            <button onClick={() => deleteData()}>Delete Task</button>
         </div>
     );
 }

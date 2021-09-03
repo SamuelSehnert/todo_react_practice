@@ -14,13 +14,16 @@ const Main = () => {
         setShowEditTask(!showEditTask)
     }
 
-    function saveTaskAndExit(newTask){
+    function ExitEditTask(newTask, mode){
         allData.forEach( task => {
-            if (task.taskID === newTask.taskID){
+            if (task.taskID === newTask.taskID && mode === 0){
                 task.title = newTask.title;
                 task.context = newTask.context;
                 task.sectionID = newTask.sectionID;
                 task.groupID = newTask.groupID;
+            }
+            else if (task.taskID === newTask.taskID && mode === 1){
+                allData.splice(allData.indexOf(newTask), 1)
             }
         })
         handleShowEditTask();
@@ -34,7 +37,7 @@ const Main = () => {
 
     const renderDisplay = (showEditTask) => {
         if (showEditTask){
-            return <EditTask saveTaskAndExit={saveTaskAndExit} taskData={selectedTask}/> 
+            return <EditTask ExitEditTask={ExitEditTask} taskData={selectedTask}/> 
         }
         else{
             return (
