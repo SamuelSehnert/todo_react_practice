@@ -7,14 +7,6 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
     const [newGroup, setNewGroup] = useState('');
     const [showNewGroupForm, setShowNewGroupForm] = useState(false);
 
-    const saveData = () => {
-        exitEditTask(newTask, 0)
-    }
-
-    const deleteData = () => {
-        exitEditTask(newTask, 1)
-    }
-
     const updateTaskData = e => {
         setNewTask({
             ...newTask,
@@ -24,26 +16,6 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 
     const updateGroupData = e => {
         setNewGroup(e.target.value)
-    }
-
-    const saveGroupData = () => {
-        exitEditGroup(newGroup, 0);
-    }
-
-    function showGroupForm(showNewGroupForm){
-        if (showNewGroupForm){
-            return (
-                <span>
-                    <input type='text' name='groupID' onChange={updateGroupData} />
-                    <button onClick={() => {
-                        saveGroupData();
-                        setShowNewGroupForm(!showNewGroupForm)
-                        }}>Save Group</button>
-                </span>)
-        }
-        else{
-            return
-        }
     }
 
     function messageString(string){
@@ -58,6 +30,22 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
             }
         }
         return retString;
+    }
+
+    function showGroupForm(showNewGroupForm){
+        if (showNewGroupForm){
+            return (
+                <span>
+                    <input type='text' name='groupID' onChange={updateGroupData} />
+                    <button onClick={() => {
+                        exitEditGroup(newGroup, 0);
+                        setShowNewGroupForm(!showNewGroupForm);
+                        }}>Save Group</button>
+                </span>)
+        }
+        else{
+            return
+        }
     }
 
     return(
@@ -89,8 +77,8 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                 <button onClick={() => setShowNewGroupForm(!showNewGroupForm)}>New Group</button>
                 {showGroupForm(showNewGroupForm)}
             </div>
-            <button onClick={() => saveData()}>Save & Close</button>
-            <button onClick={() => deleteData()}>Delete Task</button>
+            <button onClick={() => exitEditTask(newTask, 0)}>Save & Close</button>
+            <button onClick={() => exitEditTask(newTask, 1)}>Delete Task</button>
         </div>
     );
 }

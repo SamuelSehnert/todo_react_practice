@@ -15,6 +15,13 @@ const Main = () => {
         setShowEditTask(!showEditTask)
     }
 
+    //sets task and then shows popup
+    //called in Task.js
+    function handleSelectedTask(task){
+        setSelectedTask(task);
+        handleShowEditTask();
+    }
+
     function exitEditTask(newTask, mode){
         tasks.forEach( task => {
             if (task.taskID === newTask.taskID && mode === 0){ //saving a task
@@ -36,11 +43,16 @@ const Main = () => {
         }
     }
 
-    //sets task and then shows popup
-    //called in Task.js
-    function handleSelectedTask(task){
-        setSelectedTask(task);
-        handleShowEditTask();
+    function createTask(){
+        setTasks([...tasks, {
+                taskID: uniqueId(),
+                title: 'Unnamed', //title of task
+                context: 'No Text', //text of task
+                sectionID: 'not-started', //section task is in. Default to 'not-started'
+                groupID: null,
+                timeStamp: null,}
+            ]
+        )
     }
 
     const renderDisplay = (showEditTask) => {
@@ -57,18 +69,6 @@ const Main = () => {
                 </div>
             )
         }
-    }
-
-    function createTask(){
-        setTasks([...tasks, {
-                taskID: uniqueId(),
-                title: 'Unnamed', //title of task
-                context: 'No Text', //text of task
-                sectionID: 'not-started', //section task is in. Default to 'not-started'
-                groupID: null,
-                timeStamp: null,}
-            ]
-        )
     }
 
     return(
