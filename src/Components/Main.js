@@ -6,6 +6,7 @@ import EditTask from './EditTask'
 const Main = () => {
 
     const [tasks, setTasks] = useState([]);
+    const [groups, setGroups] = useState([]);
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
 
@@ -14,7 +15,7 @@ const Main = () => {
         setShowEditTask(!showEditTask)
     }
 
-    function ExitEditTask(newTask, mode){
+    function exitEditTask(newTask, mode){
         tasks.forEach( task => {
             if (task.taskID === newTask.taskID && mode === 0){ //saving a task
                 task.title = newTask.title;
@@ -28,6 +29,13 @@ const Main = () => {
         })
         handleShowEditTask();
     }
+
+    function exitEditGroup(newGroup, mode){
+        if (groups.find(group => group === newGroup) === undefined){ //making sure that groupnames aren't repeated
+            setGroups([...groups, newGroup]);
+        }
+    }
+
     //sets task and then shows popup
     //called in Task.js
     function handleSelectedTask(task){
@@ -37,7 +45,7 @@ const Main = () => {
 
     const renderDisplay = (showEditTask) => {
         if (showEditTask){
-            return <EditTask ExitEditTask={ExitEditTask} taskData={selectedTask}/> 
+            return <EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/> 
         }
         else{
             return (

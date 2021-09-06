@@ -1,19 +1,18 @@
 import React, {useState} from 'react'
 
-const EditTask = ({ExitEditTask, taskData}) => {
+const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 
     const [newTask, setNewTask] = useState(taskData);
 
     const [newGroup, setNewGroup] = useState('');
-    const [groups, setGroups] = useState([]);
     const [showNewGroupForm, setShowNewGroupForm] = useState(false);
 
     const saveData = () => {
-        ExitEditTask(newTask, 0)
+        exitEditTask(newTask, 0)
     }
 
     const deleteData = () => {
-        ExitEditTask(newTask, 1)
+        exitEditTask(newTask, 1)
     }
 
     const updateTaskData = e => {
@@ -28,7 +27,7 @@ const EditTask = ({ExitEditTask, taskData}) => {
     }
 
     const saveGroupData = () => {
-        setGroups([...groups, newGroup])
+        exitEditGroup(newGroup, 0);
     }
 
     function showGroupForm(showNewGroupForm){
@@ -36,7 +35,10 @@ const EditTask = ({ExitEditTask, taskData}) => {
             return (
                 <span>
                     <input type='text' name='groupID' onChange={updateGroupData} />
-                    <button onClick={() => saveGroupData()}>Save Group</button>
+                    <button onClick={() => {
+                        saveGroupData();
+                        setShowNewGroupForm(!showNewGroupForm)
+                        }}>Save Group</button>
                 </span>)
         }
         else{
@@ -80,7 +82,7 @@ const EditTask = ({ExitEditTask, taskData}) => {
                 <label>Change Group </label>
                 <select id='section-select' name='groupID' defaultValue={taskData.groupID} onChange={updateTaskData}>
                     <option value={null}>Ungrouped</option>
-                    {groups.map(group => {
+                    {groupData.map(group => {
                         return <option key={messageString(group)} value={messageString(group)}>{group}</option>
                     })}
                 </select>
