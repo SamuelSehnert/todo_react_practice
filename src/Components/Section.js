@@ -13,10 +13,10 @@ const Section = ({handleSelectedTask, data, stringData}) => {
             <h1>{stringData.title}</h1>
             <div className='ungroupedTasks'>
             {data.map( task => {
-                if (task.sectionID === stringData.id && task.groupID === null) { //task is ungrouped
+                if (task.sectionID === stringData.id && task.groupID === 'Ungrouped') { //task is ungrouped
                     return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
                 }
-                else {
+                else { //task is grouped
                     return null
                 }
             })}

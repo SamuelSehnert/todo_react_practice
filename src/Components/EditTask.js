@@ -18,20 +18,6 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
         setNewGroup(e.target.value)
     }
 
-    function messageString(string){
-        var retString = '';
-        for (let i = 0; i < string.length; i++) {
-            const element = string[i];
-            if (element === ' '){
-                retString += '-'
-            }
-            else{
-                retString += element.toLowerCase();
-            }
-        }
-        return retString;
-    }
-
     function showGroupForm(showNewGroupForm){
         if (showNewGroupForm){
             return (
@@ -71,7 +57,7 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                 <select id='section-select' name='groupID' defaultValue={taskData.groupID} onChange={updateTaskData}>
                     <option value={null}>Ungrouped</option>
                     {groupData.map(group => {
-                        return <option key={messageString(group)} value={messageString(group)}>{group}</option>
+                        return <option key={group} value={group}>{group}</option>
                     })}
                 </select>
                 <button onClick={() => setShowNewGroupForm(!showNewGroupForm)}>New Group</button>

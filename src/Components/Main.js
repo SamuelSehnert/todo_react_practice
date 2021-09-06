@@ -49,7 +49,7 @@ const Main = () => {
                 title: 'Unnamed', //title of task
                 context: 'No Text', //text of task
                 sectionID: 'not-started', //section task is in. Default to 'not-started'
-                groupID: null,
+                groupID: 'Ungrouped',
                 timeStamp: null,}
             ]
         )
