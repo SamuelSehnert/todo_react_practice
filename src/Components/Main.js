@@ -38,7 +38,7 @@ const Main = () => {
     }
 
     function exitEditGroup(newGroup, mode){
-        if (groups.find(group => group === newGroup) === undefined){ //making sure that groupnames aren't repeated
+        if (groups.find(group => group === newGroup) === undefined && newGroup !== ''){ //making sure that groupnames aren't repeated
             setGroups([...groups, newGroup]);
         }
     }

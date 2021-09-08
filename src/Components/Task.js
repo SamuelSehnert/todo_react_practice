@@ -6,6 +6,7 @@ const Task = ({handleSelectedTask, taskData}) => {
         <div onClick={() => handleSelectedTask(taskData)}>
             <strong>{taskData.title}</strong>
             <div>{taskData.context}</div>
+            {/* <div>{taskData.groupID}</div> */}
             <br/>
         </div>
     );

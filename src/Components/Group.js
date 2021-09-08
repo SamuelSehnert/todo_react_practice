@@ -9,7 +9,6 @@ const Group = ({groupData, handleSelectedTask}) => {
             {groupData.tasks.map( task => {
                 return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
             })}
-            <div>------------------------</div>
         </div>
     );
 }
