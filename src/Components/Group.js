@@ -28,7 +28,7 @@ const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
     function conditionalEdit(bool){
         if (bool){
             return (
-                <div>
+                <div className='edit-group'>
                     <input type='text' name='title' onChange={update} defaultValue={groupData.title}></input>
                     <div>
                         <button onClick={() => {exitEditGroup(groupStuff, 2, groupData.title); toggleEditGroup()}}>Save</button>
@@ -44,7 +44,7 @@ const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
 
     return(
         <div className='border'>
-            <div>{conditionalEdit(editGroup)}</div>
+            <div className='title'>{conditionalEdit(editGroup)}</div>
             {groupData.tasks.map( task => {
                 return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
             })}

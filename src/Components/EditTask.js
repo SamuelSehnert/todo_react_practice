@@ -8,6 +8,7 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 
     const [newGroup, setNewGroup] = useState('');
     const [showNewGroupForm, setShowNewGroupForm] = useState(false);
+    const [showInvalid, setShowInvalid] = useState([false, false]);
 
     const updateTaskData = e => {
         setNewTask({
@@ -27,6 +28,10 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
         return string
     }
 
+    function isEmpty(string){
+        return !string.trim();
+    }
+
     function showGroupForm(showNewGroupForm){
         if (showNewGroupForm){
             return (
@@ -34,8 +39,14 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                     <span>
                         <input type='text' name='groupID' onChange={updateGroupData} />
                         <button onClick={() => {
-                            exitEditGroup(newGroup, 0);
-                            setShowNewGroupForm(!showNewGroupForm);
+                            if (!isEmpty(newGroup)){
+                                exitEditGroup(newGroup, 0);
+                                setShowNewGroupForm(!showNewGroupForm);
+                                setShowInvalid([showInvalid[0], false]);
+                            }
+                            else{
+                                setShowInvalid([showInvalid[0], true]);
+                            }
                             }}>Save Group</button>
                     </span>
                 </div>
@@ -43,6 +54,18 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
         }
         else{
             return
+        }
+    }
+
+    function submissionNotValidReturn(showInvalid){
+        if (showInvalid){
+            return (<div className='invalid-submission'>Title and Context must have data!</div>)
+        }
+    }
+
+    function groupNotValid(showInvalid){
+        if (showInvalid){
+            return (<div className='invalid-submission'>Group can't be empty string</div>) 
         }
     }
 
@@ -56,6 +79,7 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                 <strong>Context</strong><br/>
                 <textarea className='context-input' type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
             </div>
+            {submissionNotValidReturn(showInvalid[0])}
             <div>
                 <label>Move Task </label>
                 <select id='section-select' name='sectionID' defaultValue={taskData.sectionID} onChange={updateTaskData}>
@@ -75,7 +99,16 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                 <button onClick={() => setShowNewGroupForm(!showNewGroupForm)}>New Group</button>
                 {showGroupForm(showNewGroupForm)}
             </div>
-            <button onClick={() => exitEditTask(newTask, 0)}>Save & Close</button>
+            {groupNotValid(showInvalid[1])}
+            <button onClick={() => {
+                if (!isEmpty(newTask.title) && !isEmpty(newTask.context)){
+                    exitEditTask(newTask, 0); 
+                    setShowInvalid([false, showInvalid[1]])
+                }
+                else {
+                    setShowInvalid([true, showInvalid[1]])
+                }
+            }}>Save & Close</button>
             <button onClick={() => exitEditTask(newTask, 1)}>Delete Task</button>
         </div>
     );

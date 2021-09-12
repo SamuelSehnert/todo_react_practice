@@ -10,8 +10,13 @@
     height: 25vh;
     width: 25vw;
     font-family: sans-serif;
+    resize: none;
 }
 
 .title-input{
     text-align: center;
+}
+
+.invalid-submission{
+    color:orangered;
 }
