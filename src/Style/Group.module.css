@@ -6,6 +6,6 @@
     cursor: pointer;
 }
 
-.edit-group > *{
-    padding: 10px;
+.input{
+    text-align: center;
 }
