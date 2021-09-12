@@ -6,7 +6,7 @@ import './../Style/Group.module.css'
 const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
 
     const [editGroup, setEditGroup] = useState(false);
-    const [groupStuff, setGroupStuff] = useState('');
+    const [groupStuff, setGroupStuff] = useState(groupData.title);
 
     const toggleEditGroup = () => {
         setEditGroup(!editGroup)
