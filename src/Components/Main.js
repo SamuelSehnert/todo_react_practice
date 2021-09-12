@@ -58,23 +58,24 @@ const Main = () => {
     }
 
     const renderDisplay = (showEditTask) => {
-        if (showEditTask){
-            return <EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/> 
-        }
-        else{
-            return (
-                <div className='background'>
-                    <div className='main-division'>
-                        <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section></span>
-                        <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section></span>
-                        <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
-                    </div>
-                    <span className='button-span'>
-                        <button className='button' onClick={() => createTask()}>New Task</button>
-                    </span>
+        return (
+            <div className='background'>
+                <div className='main-division'>
+                    <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section></span>
+                    <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section></span>
+                    <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
                 </div>
-            )
-        }
+                <span className='button-span'>
+                    <button className='button' onClick={() => createTask()}>New Task</button>
+                </span>
+                {showEditTask && (
+                    <div className='modal'>
+                        <div onClick={() => handleShowEditTask()} className="overlay"></div> {/* essentially the background, click to exit */}
+                        <div className='modal-content'><EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/> </div>
+                    </div> 
+                )}
+            </div>
+        )
     }
 
     return(

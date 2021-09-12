@@ -1,4 +1,7 @@
 .fullSection{
-    background-color: #D6FFD0;
     text-align: center;
+}
+
+.fullSection > * {
+    padding: 10px;
 }
