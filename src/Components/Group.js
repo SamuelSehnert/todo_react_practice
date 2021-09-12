@@ -25,13 +25,17 @@ const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
         }
     }
 
+    function isEmpty(string){
+        return !string.trim();
+    }
+
     function conditionalEdit(bool){
         if (bool){
             return (
                 <div>
                     <input className='input' type='text' name='title' onChange={update} defaultValue={groupData.title}></input>
                     <div>
-                        <button onClick={() => {exitEditGroup(groupStuff, 2, groupData.title); toggleEditGroup()}}>Save</button>
+                        <button onClick={() => {if(!isEmpty(groupStuff)){ exitEditGroup(groupStuff, 2, groupData.title); toggleEditGroup()}}}>Save</button>
                         <button onClick={() => {exitEditGroup(groupData.title, 1); toggleEditGroup()}}>Delete</button>
                     </div>
                 </div>
