@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.button{
+.button-new{
     background-color: #E54A4A;
     border: none;
     color: white;
@@ -26,6 +26,43 @@
     position:fixed;
     bottom:0;
     right: 0;
+
+    cursor: pointer;
+}
+
+.button-save{
+    background-color: #E54A4A;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 100%;
+
+    position:fixed;
+    bottom:0;
+
+    cursor: pointer;
+}
+
+.button-timer{
+    background-color: #E54A4A;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 100%;
+
+    position:fixed;
+    bottom:0;
+    left:0;
 
     cursor: pointer;
 }

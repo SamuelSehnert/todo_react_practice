@@ -98,7 +98,9 @@ const Main = () => {
                     <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
                 </div>
                 <span className='button-span'>
-                    <button className='button' onClick={() => createTask()}>New Task</button>
+                    <button className='button-new' onClick={() => createTask()}>New Task</button>
+                    <button className='button-save' onClick={() => saveAllData()}>Save Data</button>
+                    <button className='button-timer' onClick={() => get()}>Timer</button>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
