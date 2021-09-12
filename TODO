@@ -1,5 +1,5 @@
 [X] Make so you can delete groups
 [ ] large group name shouldn't expand out menu
-[ ] deleting a group doesn't remove it from render until you click the task
-    [ ] same with editing the group title
+[X] deleting a group doesn't remove it from render until you click the task
+    [X] same with editing the group title
 [ ] don't want to be able to make data just spaces

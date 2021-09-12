@@ -11,6 +11,7 @@ const Main = () => {
     const [groups, setGroups] = useState([]);
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
+    const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
 
     //flip-flops between the popup for editing and the main page
     function handleShowEditTask(){
@@ -40,6 +41,7 @@ const Main = () => {
     }
 
     function exitEditGroup(newGroup, mode, original=''){
+        setgroupEdit(!groupEdit)
         if (mode === 0) { //saving
             if (groups.find(group => group === newGroup) === undefined && newGroup !== ''){ //making sure that groupnames aren't repeated
                 setGroups([...groups, newGroup]);
@@ -71,6 +73,7 @@ const Main = () => {
                 }
             })
         }
+        setgroupEdit(!groupEdit)
     }
 
     function createTask(){

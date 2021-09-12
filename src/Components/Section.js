@@ -44,7 +44,6 @@ const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
         tasks = parseData();
     }
 
-
     return(
         <div>
             <h1>{stringData.title}</h1>
@@ -61,7 +60,6 @@ const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
                     return <Group key={tempData.title} handleSelectedTask={handleSelectedTask} exitEditGroup={exitEditGroup} groupData={tempData}/>
                 })}
             </div>
-            {/* <button onClick={() => console.log(stringData.title + ': ' + fullTaskData)}>WMW</button> */}
         </div>
     );
 }
