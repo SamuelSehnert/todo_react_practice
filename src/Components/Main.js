@@ -89,6 +89,14 @@ const Main = () => {
         handleSelectedTask(newTask)
     }
 
+    function saveAllData(){
+
+    }
+
+    function get(){
+
+    }
+
     const renderDisplay = (showEditTask) => {
         return (
             <div className='background'>
