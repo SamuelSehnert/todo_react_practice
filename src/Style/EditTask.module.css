@@ -5,3 +5,13 @@
 .fullSection > * {
     padding: 10px;
 }
+
+.context-input {
+    height: 25vh;
+    width: 25vw;
+    font-family: sans-serif;
+}
+
+.title-input{
+    text-align: center;
+}

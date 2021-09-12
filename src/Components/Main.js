@@ -46,15 +46,16 @@ const Main = () => {
     }
 
     function createTask(){
-        setTasks([...tasks, {
-                taskID: uniqueId(),
-                title: 'Unnamed', //title of task
-                context: 'No Text', //text of task
-                sectionID: 'not-started', //section task is in. Default to 'not-started'
-                groupID: 'Ungrouped',
-                timeStamp: null,}
-            ]
-        )
+        const newTask = {
+            taskID: uniqueId(),
+            title: 'Unnamed', //title of task
+            context: 'No Text', //text of task
+            sectionID: 'not-started', //section task is in. Default to 'not-started'
+            groupID: 'Ungrouped',
+            timeStamp: null
+        }
+        setTasks([...tasks, newTask])
+        handleSelectedTask(newTask)
     }
 
     const renderDisplay = (showEditTask) => {

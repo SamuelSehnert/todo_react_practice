@@ -20,16 +20,26 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
         setNewGroup(e.target.value)
     }
 
+    const messageString = (string) => {
+        if (string.length > 20){
+            return string.slice(0, 20) + '...'
+        }
+        return string
+    }
+
     function showGroupForm(showNewGroupForm){
         if (showNewGroupForm){
             return (
-                <span>
-                    <input type='text' name='groupID' onChange={updateGroupData} />
-                    <button onClick={() => {
-                        exitEditGroup(newGroup, 0);
-                        setShowNewGroupForm(!showNewGroupForm);
-                        }}>Save Group</button>
-                </span>)
+                <div className='fullSection'>
+                    <span>
+                        <input type='text' name='groupID' onChange={updateGroupData} />
+                        <button onClick={() => {
+                            exitEditGroup(newGroup, 0);
+                            setShowNewGroupForm(!showNewGroupForm);
+                            }}>Save Group</button>
+                    </span>
+                </div>
+                )
         }
         else{
             return
@@ -40,11 +50,11 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
         <div className='fullSection'>
             <div>
                 Title<br/>
-                <input type='text' name='title' onChange={updateTaskData} defaultValue={taskData.title}/>
+                <input className='title-input' type='text' name='title' onChange={updateTaskData} defaultValue={taskData.title}/>
             </div>
             <div>
                 Context<br/>
-                <input type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
+                <textarea className='context-input' type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
             </div>
             <div>
                 <label>Move Task </label>
@@ -59,7 +69,7 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                 <select id='section-select' name='groupID' defaultValue={taskData.groupID} onChange={updateTaskData}>
                     <option value={null}>Ungrouped</option>
                     {groupData.map(group => {
-                        return <option key={group} value={group}>{group}</option>
+                        return <option key={group} value={group}>{messageString(group)}</option>
                     })}
                 </select>
                 <button onClick={() => setShowNewGroupForm(!showNewGroupForm)}>New Group</button>
