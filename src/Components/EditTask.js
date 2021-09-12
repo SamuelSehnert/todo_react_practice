@@ -49,11 +49,11 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
     return(
         <div className='fullSection'>
             <div>
-                Title<br/>
+                <strong>Title</strong><br/>
                 <input className='title-input' type='text' name='title' onChange={updateTaskData} defaultValue={taskData.title}/>
             </div>
             <div>
-                Context<br/>
+                <strong>Context</strong><br/>
                 <textarea className='context-input' type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
             </div>
             <div>

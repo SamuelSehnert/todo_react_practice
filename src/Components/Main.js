@@ -39,9 +39,37 @@ const Main = () => {
         handleShowEditTask();
     }
 
-    function exitEditGroup(newGroup, mode){
-        if (groups.find(group => group === newGroup) === undefined && newGroup !== ''){ //making sure that groupnames aren't repeated
-            setGroups([...groups, newGroup]);
+    function exitEditGroup(newGroup, mode, original=''){
+        if (mode === 0) { //saving
+            if (groups.find(group => group === newGroup) === undefined && newGroup !== ''){ //making sure that groupnames aren't repeated
+                setGroups([...groups, newGroup]);
+            }
+        }
+        else if (mode === 1){ //deleting
+            groups.forEach( group => {
+                if (group === newGroup) {
+                    groups.splice(groups.indexOf(newGroup), 1);
+                }
+            })
+            tasks.forEach( task => {
+                if (task.groupID === newGroup) {
+                    task.groupID = 'Ungrouped'
+                }
+            })
+        }
+        else if (mode === 2){
+            groups.forEach( group => {
+                if (group === original){
+                    const tempGroup = groups;
+                    tempGroup[groups.indexOf(group)] = newGroup;
+                    setGroups(tempGroup)
+                }
+            })
+            tasks.forEach( task => {
+                if (task.groupID === original) {
+                    task.groupID = newGroup;
+                }
+            })
         }
     }
 
@@ -62,9 +90,9 @@ const Main = () => {
         return (
             <div className='background'>
                 <div className='main-division'>
-                    <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section></span>
-                    <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section></span>
-                    <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
+                    <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section></span>
+                    <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section></span>
+                    <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
                 </div>
                 <span className='button-span'>
                     <button className='button' onClick={() => createTask()}>New Task</button>

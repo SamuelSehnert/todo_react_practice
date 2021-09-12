@@ -9,7 +9,7 @@ import './../Style/Section.module.css'
  *      data -> JSON object
  */
 
-const Section = ({handleSelectedTask, data, stringData}) => {
+const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
 
     // const [fullTaskData, setFullTaskData] = useState(parseData());
     var tasks = [];
@@ -58,7 +58,7 @@ const Section = ({handleSelectedTask, data, stringData}) => {
                         title: group[0].groupID,
                         tasks: group
                     }
-                    return <Group key={tempData.title} handleSelectedTask={handleSelectedTask} groupData={tempData}/>
+                    return <Group key={tempData.title} handleSelectedTask={handleSelectedTask} exitEditGroup={exitEditGroup} groupData={tempData}/>
                 })}
             </div>
             {/* <button onClick={() => console.log(stringData.title + ': ' + fullTaskData)}>WMW</button> */}
