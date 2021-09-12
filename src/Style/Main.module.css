@@ -1,0 +1,30 @@
+.background{
+    background-color: #D6FFD0;
+}
+.main-division{
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-span{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    background-color: #E54A4A; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 100%;
+
+    position:fixed;
+    bottom:0;
+    right: 0;
+
+}

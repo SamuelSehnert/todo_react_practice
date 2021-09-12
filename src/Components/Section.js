@@ -2,6 +2,8 @@ import React from 'react'
 import Task from './Task'
 import Group from './Group'
 
+import './../Style/Section.module.css'
+
 /* This for the the NOT STARTED, IN PROGRESS, and DONE section
  * Inputs:
  *      data -> JSON object
@@ -46,7 +48,7 @@ const Section = ({handleSelectedTask, data, stringData}) => {
     return(
         <div>
             <h1>{stringData.title}</h1>
-            <div>
+            <div className='scrollable'>
                 {runAtStartInReturn()}
                 {tasks[0].map( task => {
                     return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />

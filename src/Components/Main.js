@@ -3,6 +3,8 @@ import { uniqueId } from 'lodash'
 import Section from './Section'
 import EditTask from './EditTask'
 
+import './../Style/Main.module.css'
+
 const Main = () => {
 
     const [tasks, setTasks] = useState([]);
@@ -61,11 +63,15 @@ const Main = () => {
         }
         else{
             return (
-                <div>
-                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section>
-                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section>
-                    <Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section>
-                    <button onClick={() => createTask()}>New Task</button>
+                <div className='background'>
+                    <div className='main-division'>
+                        <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section></span>
+                        <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section></span>
+                        <span><Section handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
+                    </div>
+                    <span className='button-span'>
+                        <button className='button' onClick={() => createTask()}>New Task</button>
+                    </span>
                 </div>
             )
         }
