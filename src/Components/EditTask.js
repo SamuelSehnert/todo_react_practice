@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+import './../Style/EditTask.module.css'
+
 const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 
     const [newTask, setNewTask] = useState(taskData);
@@ -35,13 +37,13 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
     }
 
     return(
-        <div>
+        <div className='fullSection'>
             <div>
-                Title
+                Title<br/>
                 <input type='text' name='title' onChange={updateTaskData} defaultValue={taskData.title}/>
             </div>
             <div>
-                Context
+                Context<br/>
                 <input type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
             </div>
             <div>

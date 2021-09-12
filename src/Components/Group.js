@@ -7,7 +7,7 @@ const Group = ({groupData, handleSelectedTask}) => {
 
     return(
         <div className='border'>
-            <h2 className='border'>{groupData.title}</h2>
+            <h2>{groupData.title}</h2>
             {groupData.tasks.map( task => {
                 return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
             })}
