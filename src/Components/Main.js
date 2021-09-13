@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Section from './Section'
 import EditTask from './EditTask'
 import Pomodoro from './Pomodoro'
@@ -11,16 +11,28 @@ const Main = () => {
     const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
-    const [timeData, setTimeData] = useState({
-        totalSeconds: 1500,
-        secondsRemaining: 1500
-    }); //25 minutes, in seconds
+
+    const [timeData, setTimeData] = useState(20) //25 minutes in seconds
+    const [timerGoing, setTimerGoing] = useState(false) //25 minutes in seconds
 
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
     const [showTimer, setShowTimer] = useState(false);
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
 
     const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
+
+    var interval;
+    useEffect(() => {
+        if (timerGoing){
+            interval = setInterval(() => {
+                setTimeData((timerData) => timerData - 1)
+            }, 1000)
+        }
+        else{
+            clearInterval(interval)
+        }
+        return () => clearInterval(interval)
+    }, [timerGoing]);
 
     function saveAllDataToLocalstorage(){
         localStorage.clear();
@@ -131,7 +143,8 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <div className='pomodoro' ><Pomodoro timeData={timeData} setShowTimer={setShowTimer} /></div>
+                    <div className='pomodoro' ><Pomodoro timeData={timeData} setShowTimer={setShowTimer} setTimerGoing={setTimerGoing} /></div>
+                    <button onClick={() => setTimerGoing(false)}>STOP</button>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
