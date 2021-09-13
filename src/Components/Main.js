@@ -119,7 +119,6 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <button className='button-timer'>Timer</button>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
