@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { uniqueId } from 'lodash'
 import Section from './Section'
 import EditTask from './EditTask'
 
@@ -7,11 +6,27 @@ import './../Style/Main.module.css'
 
 const Main = () => {
 
-    const [tasks, setTasks] = useState([]);
-    const [groups, setGroups] = useState([]);
+    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
+    const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
     const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
+
+    const [ID, setID] = useState(Number(localStorage.getItem('id')));
+
+    function saveAllDataToLocalstorage(){
+        localStorage.clear();
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        localStorage.setItem('groups', JSON.stringify(groups));
+        localStorage.setItem('id', JSON.stringify(ID));
+    }
+
+    function inCaseNotLoaded() {
+        if (tasks === null || groups === null){
+            setTasks([]);
+            setGroups([]);
+        }
+    }
 
     //flip-flops between the popup for editing and the main page
     function handleShowEditTask(){
@@ -38,6 +53,7 @@ const Main = () => {
             }
         })
         handleShowEditTask();
+        saveAllDataToLocalstorage()
     }
 
     function exitEditGroup(newGroup, mode, original=''){
@@ -74,11 +90,13 @@ const Main = () => {
             })
         }
         setgroupEdit(!groupEdit)
+        saveAllDataToLocalstorage()
     }
 
     function createTask(){
+        setID(ID + 1)
         const newTask = {
-            taskID: uniqueId(),
+            taskID: ID,
             title: 'Unnamed', //title of task
             context: 'No Text', //text of task
             sectionID: 'not-started', //section task is in. Default to 'not-started'
@@ -87,17 +105,11 @@ const Main = () => {
         }
         setTasks([...tasks, newTask])
         handleSelectedTask(newTask)
-    }
-
-    function saveAllData(){
-
-    }
-
-    function get(){
-
+        saveAllDataToLocalstorage()
     }
 
     const renderDisplay = (showEditTask) => {
+        inCaseNotLoaded();
         return (
             <div className='background'>
                 <div className='main-division'>
@@ -107,8 +119,7 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <button className='button-save' onClick={() => saveAllData()}>Save Data</button>
-                    <button className='button-timer' onClick={() => get()}>Timer</button>
+                    <button className='button-timer'>Timer</button>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
