@@ -1,18 +1,26 @@
 import React, {useState} from 'react'
 import Section from './Section'
 import EditTask from './EditTask'
+import Pomodoro from './Pomodoro'
 
 import './../Style/Main.module.css'
+import EditPomodoro from './EditPomodoro'
 
 const Main = () => {
 
     const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
-    const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
-    const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
-    const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
-
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
+    const [timeData, setTimeData] = useState({
+        totalSeconds: 1500,
+        secondsRemaining: 1500
+    }); //25 minutes, in seconds
+
+    const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
+    const [showTimer, setShowTimer] = useState(false);
+    const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
+
+    const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
 
     function saveAllDataToLocalstorage(){
         localStorage.clear();
@@ -31,6 +39,10 @@ const Main = () => {
     //flip-flops between the popup for editing and the main page
     function handleShowEditTask(){
         setShowEditTask(!showEditTask)
+    }
+
+    function handleShowTimer(){
+        setShowTimer(!showTimer)
     }
 
     //sets task and then shows popup
@@ -119,13 +131,20 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
+                    <div className='pomodoro' ><Pomodoro timeData={timeData} setShowTimer={setShowTimer} /></div>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
                         <div onClick={() => handleShowEditTask()} className="overlay"></div> {/* essentially the background, click to exit */}
-                        <div className='modal-content'><EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/> </div>
+                        <div className='modal-content'><EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/></div>
                     </div> 
                 )}
+                {showTimer && (
+                   <div className='modal'>
+                        <div onClick={() => handleShowTimer()} className="overlay"></div> {/* essentially the background, click to exit */}
+                        <div className='modal-content'><EditPomodoro /></div>
+                    </div> 
+                    )}
             </div>
         )
     }
