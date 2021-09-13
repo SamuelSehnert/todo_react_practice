@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './../Style/Pomodoro.module.css'
 
 const Pomodoro = ({timeData, setShowTimer, setTimerGoing}) => {
 
+    const [isPaused, setIsPaused] = useState(false);
 
     function messageData(){
         var output = ''
@@ -25,12 +26,19 @@ const Pomodoro = ({timeData, setShowTimer, setTimerGoing}) => {
         return output
     }
 
+    function conditionalButtonReturn(){
+        if (!isPaused){
+            return <button onClick={() => { setIsPaused(!isPaused); setTimerGoing(true) }}>Start</button>
+        }
+        return <button onClick={() => { setIsPaused(!isPaused); setTimerGoing(false) }}>Stop</button>
+    }
+
     return(
         <div>
             <strong>Pomodoro</strong>
             <div>{messageData()}</div>
             <span>
-                <button onClick={() => { setTimerGoing(true) }}>Start</button>
+                {conditionalButtonReturn()}
                 <button onClick={() => { setShowTimer(true) }}>Edit</button>
             </span>
         </div>

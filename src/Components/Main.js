@@ -12,7 +12,7 @@ const Main = () => {
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
 
-    const [timeData, setTimeData] = useState(20) //25 minutes in seconds
+    const [timeData, setTimeData] = useState(5) //25 minutes in seconds
     const [timerGoing, setTimerGoing] = useState(false) //25 minutes in seconds
 
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
@@ -24,8 +24,15 @@ const Main = () => {
     var interval;
     useEffect(() => {
         if (timerGoing){
+            var remove = 0;
             interval = setInterval(() => {
-                setTimeData((timerData) => timerData - 1)
+                setTimeData((timeData) => timeData - 1)
+                console.log(timeData - remove)
+                if (timeData - remove === 1) {
+                    endTimer();
+                    clearInterval(interval)
+                }
+                remove++;
             }, 1000)
         }
         else{
@@ -33,6 +40,10 @@ const Main = () => {
         }
         return () => clearInterval(interval)
     }, [timerGoing]);
+
+    function endTimer(){
+        console.log('DONE')
+    }
 
     function saveAllDataToLocalstorage(){
         localStorage.clear();
@@ -144,7 +155,6 @@ const Main = () => {
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
                     <div className='pomodoro' ><Pomodoro timeData={timeData} setShowTimer={setShowTimer} setTimerGoing={setTimerGoing} /></div>
-                    <button onClick={() => setTimerGoing(false)}>STOP</button>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
