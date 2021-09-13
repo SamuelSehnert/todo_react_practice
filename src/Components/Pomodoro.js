@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './../Style/Pomodoro.module.css'
 
-const Pomodoro = ({timeData, setShowTimer, setTimerGoing, timerGoing, nextStage}) => {
+const Pomodoro = ({timeData, setshowEditTimer, setTimerGoing, timerGoing, nextStage}) => {
 
     const [isPaused, setIsPaused] = useState(false);
 
@@ -37,12 +37,11 @@ const Pomodoro = ({timeData, setShowTimer, setTimerGoing, timerGoing, nextStage}
     }
 
     return(
-        <div>
-            <strong>Pomodoro</strong>
+        <div className='total'>
             <div>{messageData()}</div>
-            <span>
+            <span className='button-span'>
                 {conditionalButtonReturn()}
-                <button onClick={() => { setShowTimer(true) }}>Edit</button>
+                <button onClick={() => { setshowEditTimer(true) }}>Edit</button>
             </span>
         </div>
     );

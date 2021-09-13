@@ -1,0 +1,7 @@
+.total{
+    padding: 10px;
+}
+
+.total > *{
+    padding: 10px;
+}

@@ -12,12 +12,12 @@ const Main = () => {
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
 
-    const [timeData, setTimeData] = useState(3) //25 minutes in seconds
+    const [timeData, setTimeData] = useState(3) // want to refractor out, but can't figure out the setTimeData() function
     const [allTime, setAllTime] = useState([timeData, 2, 0]) //[work time, break time, stage : 0=work, 1=break]
     const [timerGoing, setTimerGoing] = useState(false) //25 minutes in seconds
 
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
-    const [showTimer, setShowTimer] = useState(false);
+    const [showEditTimer, setshowEditTimer] = useState(false);
     const [selectedTask, setSelectedTask] = useState({}) //state for the current task User is looking at
 
     const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
@@ -71,8 +71,8 @@ const Main = () => {
         setShowEditTask(!showEditTask)
     }
 
-    function handleShowTimer(){
-        setShowTimer(!showTimer)
+    function handleshowEditTimer(){
+        setshowEditTimer(!showEditTimer)
     }
 
     //sets task and then shows popup
@@ -152,10 +152,10 @@ const Main = () => {
 
     function renderWorkOrBreak(){
         if (allTime[2] === 0){
-            return <div><strong>Work</strong></div>
+            return <div className='work-or-break'><strong>Work</strong></div>
         }
         else if (allTime[2] === 1){
-            return <div><strong>Break</strong></div>
+            return <div className='work-or-break'><strong>Break</strong></div>
         }
     }
 
@@ -170,7 +170,7 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro timeData={timeData} setShowTimer={setShowTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div>
+                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro timeData={timeData} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div>
                 </span>
                 {showEditTask && (
                     <div className='modal'>
@@ -178,9 +178,9 @@ const Main = () => {
                         <div className='modal-content'><EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/></div>
                     </div> 
                 )}
-                {showTimer && (
+                {showEditTimer && (
                    <div className='modal'>
-                        <div onClick={() => handleShowTimer()} className="overlay"></div> {/* essentially the background, click to exit */}
+                        <div onClick={() => handleshowEditTimer()} className="overlay"></div> {/* essentially the background, click to exit */}
                         <div className='modal-content'><EditPomodoro /></div>
                     </div> 
                     )}

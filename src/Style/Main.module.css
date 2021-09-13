@@ -62,6 +62,10 @@
     color: white;
 }
 
+.work-or-break{
+    font-size: 25px;
+}
+
 .modal-content {
     position: absolute;
     top: 40%;
