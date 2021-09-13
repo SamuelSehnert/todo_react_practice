@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import Section from './Section'
 import EditTask from './EditTask'
 import Pomodoro from './Pomodoro'
+import EditPomodoro from './EditPomodoro'
 
 import './../Style/Main.module.css'
-import EditPomodoro from './EditPomodoro'
 
 const Main = () => {
 
@@ -12,7 +12,8 @@ const Main = () => {
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
 
-    const [timeData, setTimeData] = useState(5) //25 minutes in seconds
+    const [timeData, setTimeData] = useState(3) //25 minutes in seconds
+    const [allTime, setAllTime] = useState([timeData, 2, 0]) //[work time, break time, stage : 0=work, 1=break]
     const [timerGoing, setTimerGoing] = useState(false) //25 minutes in seconds
 
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
@@ -27,13 +28,11 @@ const Main = () => {
             var remove = 0;
             interval = setInterval(() => {
                 setTimeData((timeData) => timeData - 1)
-                console.log(timeData - remove)
                 if (timeData - remove === 1) {
-                    endTimer();
-                    clearInterval(interval)
+                    setTimerGoing(!timerGoing) //sets to false
                 }
                 remove++;
-            }, 1000)
+            }, 500)
         }
         else{
             clearInterval(interval)
@@ -41,8 +40,16 @@ const Main = () => {
         return () => clearInterval(interval)
     }, [timerGoing]);
 
-    function endTimer(){
-        console.log('DONE')
+    function nextStage(){
+        if (allTime[2] === 1){
+            setTimeData(allTime[0])
+            setAllTime([allTime[0], allTime[1], 0])
+        }
+        else if (allTime[2] === 0){
+            setTimeData(allTime[1])
+            setAllTime([allTime[0], allTime[1], 1])
+        } 
+        setTimerGoing(!timerGoing)
     }
 
     function saveAllDataToLocalstorage(){
@@ -143,6 +150,15 @@ const Main = () => {
         saveAllDataToLocalstorage()
     }
 
+    function renderWorkOrBreak(){
+        if (allTime[2] === 0){
+            return <div><strong>Work</strong></div>
+        }
+        else if (allTime[2] === 1){
+            return <div><strong>Break</strong></div>
+        }
+    }
+
     const renderDisplay = (showEditTask) => {
         inCaseNotLoaded();
         return (
@@ -154,7 +170,7 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <div className='pomodoro' ><Pomodoro timeData={timeData} setShowTimer={setShowTimer} setTimerGoing={setTimerGoing} /></div>
+                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro timeData={timeData} setShowTimer={setShowTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div>
                 </span>
                 {showEditTask && (
                     <div className='modal'>

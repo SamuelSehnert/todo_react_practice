@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './../Style/Pomodoro.module.css'
 
-const Pomodoro = ({timeData, setShowTimer, setTimerGoing}) => {
+const Pomodoro = ({timeData, setShowTimer, setTimerGoing, timerGoing, nextStage}) => {
 
     const [isPaused, setIsPaused] = useState(false);
 
@@ -27,7 +27,10 @@ const Pomodoro = ({timeData, setShowTimer, setTimerGoing}) => {
     }
 
     function conditionalButtonReturn(){
-        if (!isPaused){
+        if (isPaused && !timerGoing){
+            return <button onClick={() => nextStage()}>Next</button>
+        }
+        else if (!isPaused){
             return <button onClick={() => { setIsPaused(!isPaused); setTimerGoing(true) }}>Start</button>
         }
         return <button onClick={() => { setIsPaused(!isPaused); setTimerGoing(false) }}>Stop</button>
