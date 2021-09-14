@@ -2,21 +2,21 @@ import React, { useState } from 'react'
 
 import './../Style/Pomodoro.module.css'
 
-const Pomodoro = ({timeData, setshowEditTimer, setTimerGoing, timerGoing, nextStage}) => {
+const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage}) => {
 
     const [isPaused, setIsPaused] = useState(false);
 
-    function messageData(){
+    function messageData(time){
         var output = ''
 
-        var minutes = parseInt(timeData / 60, 10); 
+        var minutes = parseInt(time / 60, 10); 
         if (parseInt(minutes / 10, 10) === 0){
             output += '0' + minutes;
         }
         else{
             output += minutes
         }
-        var seconds = parseInt(timeData % 60, 10);
+        var seconds = parseInt(time % 60, 10);
         if (parseInt(seconds / 10, 10) === 0){
             output += ':0' + seconds;
         }
@@ -38,7 +38,10 @@ const Pomodoro = ({timeData, setshowEditTimer, setTimerGoing, timerGoing, nextSt
 
     return(
         <div className='total'>
-            <div>{messageData()}</div>
+            <div className='times'>
+                <div className='top'>{messageData(currentTime)}</div>
+                <div className='bot'>{messageData(secondTime)}</div>
+            </div>
             <span className='button-span'>
                 {conditionalButtonReturn()}
                 <button onClick={() => { setshowEditTimer(true) }}>Edit</button>

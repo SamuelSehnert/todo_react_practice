@@ -181,7 +181,8 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro timeData={timeData} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div>
+                    {/* <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={allTime[1]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div> */}
+                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={(allTime[2] === 0) ? allTime[1] : allTime[0]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div>
                 </span>
                 {showEditTask && (
                     <div className='modal'>

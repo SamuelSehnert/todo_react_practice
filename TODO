@@ -3,3 +3,5 @@
 [X] deleting a group doesn't remove it from render until you click the task
     [X] same with editing the group title
 [X] don't want to be able to make data just spaces
+[X] POM
+[ ] Sometimes, the edit pom doesn't work as expected, haven't figured out how to recreate issue
