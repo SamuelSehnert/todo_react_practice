@@ -12,8 +12,8 @@ const Main = () => {
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
 
-    const [timeData, setTimeData] = useState(3) // want to refractor out, but can't figure out the setTimeData() function
-    const [allTime, setAllTime] = useState([timeData, 2, 0]) //[work time, break time, stage : 0=work, 1=break]
+    const [timeData, setTimeData] = useState(10) // want to refractor out, but can't figure out the setTimeData() function
+    const [allTime, setAllTime] = useState([10, 5, 0]) //[work time, break time, stage : 0=work, 1=break]
     const [timerGoing, setTimerGoing] = useState(false) //25 minutes in seconds
 
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
@@ -50,6 +50,17 @@ const Main = () => {
             setAllTime([allTime[0], allTime[1], 1])
         } 
         setTimerGoing(!timerGoing)
+    }
+
+    function saveTimeData(newTimes){
+        const workTime = (60 * newTimes[0]) + newTimes[1]
+        const breakTime = (60 * newTimes[2]) + newTimes[3]
+
+        setTimeData(workTime)
+        allTime[0] = workTime;
+        allTime[1] = breakTime;
+
+        setshowEditTimer(!showEditTimer)
     }
 
     function saveAllDataToLocalstorage(){
@@ -181,7 +192,7 @@ const Main = () => {
                 {showEditTimer && (
                    <div className='modal'>
                         <div onClick={() => handleshowEditTimer()} className="overlay"></div> {/* essentially the background, click to exit */}
-                        <div className='modal-content'><EditPomodoro /></div>
+                        <div className='modal-content'><EditPomodoro allTimeData={allTime} saveData={saveTimeData}/></div>
                     </div> 
                     )}
             </div>
