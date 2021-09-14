@@ -12,8 +12,8 @@ const Main = () => {
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
     const [ID, setID] = useState(Number(localStorage.getItem('id')));
 
-    const [timeData, setTimeData] = useState(10) // want to refractor out, but can't figure out the setTimeData() function
-    const [allTime, setAllTime] = useState([10, 5, 0]) //[work time, break time, stage : 0=work, 1=break]
+    const [timeData, setTimeData] = useState(1500) // want to refractor out, but can't figure out the setTimeData() function
+    const [allTime, setAllTime] = useState([1500, 300, 0]) //[work time, break time, stage : 0=work, 1=break]
     const [timerGoing, setTimerGoing] = useState(false) //25 minutes in seconds
 
     const [showEditTask, setShowEditTask] = useState(false); //state for choosing to render the edit task or the sections
