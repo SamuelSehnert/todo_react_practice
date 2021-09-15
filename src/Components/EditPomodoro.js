@@ -21,10 +21,8 @@ export default function EditPomodoro({allTimeData, saveData}) {
             seconds = '0' + seconds;
         }
         
-        if (isValid){
         times[mode] = parseInt(minutes, 10);
         times[mode + 1] = parseInt(seconds, 10);
-        }
 
         return (
                 <span>
@@ -40,7 +38,7 @@ export default function EditPomodoro({allTimeData, saveData}) {
             return
         }
         times.forEach( time => {
-            if (time <= 60 && Math.floor(time) === time && time >= 0){
+            if (Math.floor(time) === time && time >= 0){
                 correct++;
             }
         })
