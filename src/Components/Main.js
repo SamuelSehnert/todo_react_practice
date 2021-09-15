@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Section from './Section'
 import EditTask from './EditTask'
 import Pomodoro from './Pomodoro'
@@ -22,6 +22,8 @@ const Main = () => {
 
     const [groupEdit, setgroupEdit] = useState(false); //used to force re-render after group edit
 
+    const childFunc = useRef();
+
     var interval;
     useEffect(() => {
         if (timerGoing){
@@ -30,9 +32,10 @@ const Main = () => {
                 setTimeData((timeData) => timeData - 1)
                 if (timeData - remove === 1) {
                     setTimerGoing(!timerGoing) //sets to false
+                    childFunc.current();
                 }
                 remove++;
-            }, 500)
+            }, 1000)
         }
         else{
             clearInterval(interval)
@@ -181,8 +184,7 @@ const Main = () => {
                 </div>
                 <span className='button-span'>
                     <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    {/* <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={allTime[1]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div> */}
-                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={(allTime[2] === 0) ? allTime[1] : allTime[0]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} /></div>
+                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={(allTime[2] === 0) ? allTime[1] : allTime[0]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} childFunc={childFunc} /></div>
                 </span>
                 {showEditTask && (
                     <div className='modal'>

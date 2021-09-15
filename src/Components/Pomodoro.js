@@ -1,10 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './../Style/Pomodoro.module.css'
 
-const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage}) => {
+import bell from './../bell.mp3'
+
+const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage, childFunc}) => {
 
     const [isPaused, setIsPaused] = useState(false);
+    const [, toggle] = useAudio(bell);
+
+    useEffect(() => {
+        childFunc.current = toggle
+      }, [])
+
+    function useAudio() {
+        const [audio] = useState(new Audio(bell));
+        const [playing, setPlaying] = useState(false);
+      
+        const toggle = () => setPlaying(!playing);
+      
+        useEffect(() => {
+            playing ? audio.play() : audio.pause();
+          },
+          [playing]
+        );
+      
+        useEffect(() => {
+          audio.addEventListener('ended', () => setPlaying(false));
+          return () => {
+            audio.removeEventListener('ended', () => setPlaying(false));
+          };
+        }, []);
+      
+        return [playing, toggle];
+    };
 
     function messageData(time){
         var output = ''
