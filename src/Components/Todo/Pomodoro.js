@@ -56,7 +56,7 @@ const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, tim
     }
 
     function conditionalButtonReturn(){
-        if (isPaused && !timerGoing){
+        if (isPaused && !timerGoing && currentTime === 0){
             return <button onClick={() => nextStage()}>Next</button>
         }
         else if (!isPaused){
@@ -73,7 +73,7 @@ const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, tim
             </div>
             <span className='button-span'>
                 {conditionalButtonReturn()}
-                <button onClick={() => { setIsPaused(!isPaused); setTimerGoing(false); setshowEditTimer(true) }}>Edit</button>
+                <button onClick={() => { setshowEditTimer(true) }}>Edit</button>
             </span>
         </div>
     );
