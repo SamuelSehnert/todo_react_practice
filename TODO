@@ -1,7 +1,10 @@
-[X] Make so you can delete groups
-[ ] large group name shouldn't expand out menu
-[X] deleting a group doesn't remove it from render until you click the task
-    [X] same with editing the group title
-[X] don't want to be able to make data just spaces
-[X] POM
-[ ] Sometimes, the edit pom doesn't work as expected, haven't figured out how to recreate issue
+Todo comp
+    [X] Make so you can delete groups
+    [X] large group name shouldn't expand out menu
+    [X] deleting a group doesn't remove it from render until you click the task
+        [X] same with editing the group title
+    [X] don't want to be able to make data just spaces
+    [X] POM
+    [X] Sometimes, the edit pom doesn't work as expected, haven't figured out how to recreate issue
+    [ ] Bug with changing the time while the timer is running. Goes below zero
+        [ ] In fact, if you edit while it counts down, it doesn't even change.
