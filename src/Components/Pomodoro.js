@@ -73,7 +73,7 @@ const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, tim
             </div>
             <span className='button-span'>
                 {conditionalButtonReturn()}
-                <button onClick={() => { setshowEditTimer(true) }}>Edit</button>
+                <button onClick={() => { setIsPaused(!isPaused); setTimerGoing(false); setshowEditTimer(true) }}>Edit</button>
             </span>
         </div>
     );
