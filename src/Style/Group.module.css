@@ -8,4 +8,19 @@
 
 .input{
     text-align: center;
+    /* width:50%; */
+}
+
+.modal2 .overlay2 {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.modal-content2 {
+    position: relative;
 }

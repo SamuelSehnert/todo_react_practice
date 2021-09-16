@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './../Style/Task.module.css'
+import './../../Style/Task.module.css'
 
 const Task = ({handleSelectedTask, taskData}) => {
 

@@ -4,9 +4,9 @@ import EditTask from './EditTask'
 import Pomodoro from './Pomodoro'
 import EditPomodoro from './EditPomodoro'
 
-import './../Style/Main.module.css'
+import './../../Style/Todo.module.css'
 
-const Main = () => {
+const Todo = () => {
 
     const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
@@ -209,4 +209,4 @@ const Main = () => {
     );
 }
 
-export default Main;
+export default Todo;

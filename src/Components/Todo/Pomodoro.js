@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import './../Style/Pomodoro.module.css'
+import './../../Style/Pomodoro.module.css'
 
-import bell from './../bell.mp3'
+import bell from './../../bell.mp3'
 
 const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage, childFunc}) => {
 

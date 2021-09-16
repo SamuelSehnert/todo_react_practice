@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-import './../Style/EditTask.module.css'
+import './../../Style/EditTask.module.css'
 
 const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 

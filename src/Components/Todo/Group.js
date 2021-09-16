@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Task from './Task'
 
-import './../Style/Group.module.css'
+import './../../Style/Group.module.css'
 
 const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
 
@@ -32,11 +32,14 @@ const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
     function conditionalEdit(bool){
         if (bool){
             return (
-                <div>
-                    <input className='input' type='text' name='title' onChange={update} defaultValue={groupData.title}></input>
-                    <div>
-                        <button onClick={() => {if(!isEmpty(groupStuff)){ exitEditGroup(groupStuff, 2, groupData.title); toggleEditGroup()}}}>Save</button>
-                        <button onClick={() => {exitEditGroup(groupData.title, 1); toggleEditGroup()}}>Delete</button>
+                <div className='modal2'>
+                    <div onClick={() =>  toggleEditGroup()} className="overlay2"></div>
+                    <div className='modal-content2'>
+                        <input className='input' type='text' name='title' onChange={update} defaultValue={groupData.title} style={{width: String(groupStuff.length + 1) +'ch'}} ></input>
+                        <div>
+                            <button onClick={() => {if(!isEmpty(groupStuff)){ exitEditGroup(groupStuff, 2, groupData.title); toggleEditGroup()}}}>Save</button>
+                            <button onClick={() => {exitEditGroup(groupData.title, 1); toggleEditGroup()}}>Delete</button>
+                        </div>
                     </div>
                 </div>
             )

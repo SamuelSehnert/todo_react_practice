@@ -2,7 +2,7 @@ import React from 'react'
 import Task from './Task'
 import Group from './Group'
 
-import './../Style/Section.module.css'
+import './../../Style/Section.module.css'
 
 /* This for the the NOT STARTED, IN PROGRESS, and DONE section
  * Inputs:

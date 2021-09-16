@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import './../Style/EditPomodoro.module.css'
+import './../../Style/EditPomodoro.module.css'
 
 export default function EditPomodoro({allTimeData, saveData}) {
 
