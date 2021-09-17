@@ -6,5 +6,5 @@ Todo comp
     [X] don't want to be able to make data just spaces
     [X] POM
     [X] Sometimes, the edit pom doesn't work as expected, haven't figured out how to recreate issue
-    [ ] Bug with changing the time while the timer is running. Goes below zero
-        [ ] In fact, if you edit while it counts down, it doesn't even change.
+    [X] Bug with changing the time while the timer is running. Goes below zero
+        [X] In fact, if you edit while it counts down, it doesn't even change.

@@ -1,9 +1,9 @@
 import React from 'react'
-import Todo from './Components/Todo/Todo'
+import Main from './Components/Main'
 
 function App() {
   return (
-    <Todo />
+    <Main />
   );
 }
 
