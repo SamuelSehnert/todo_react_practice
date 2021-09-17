@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -13,12 +13,21 @@ const StyledHeaderFull = styled.div`
     background-color: #D0D6FF;
 `
 
+const pages = ['/', '/todo', '/character-sheet']
+const titles = ['Home', 'Todo', 'Character Sheet']
+
 export default function Header() {
+    const [active, setActive] = useState(pages[0])
     return (
         <StyledHeaderFull>
-            <Link to='/' style={{color: 'black'}}>Home</Link>
-            <Link to='/character-sheet' style={{color: 'black'}}>Character Sheet</Link>
-            <Link to='/todo' style={{color: 'black'}}>Todo</Link>
+            {pages.map( page => {
+                if (page === active) { 
+                    return <Link to={page} key={page} onClick={() => setActive(pages[pages.indexOf(page)])} style={{textDecoration: 'none', color: 'black', 'borderStyle': 'hidden hidden solid hidden'}}>{titles[pages.indexOf(page)]}</Link>
+                }
+                else{
+                    return <Link to={page} key={page} onClick={() => setActive(pages[pages.indexOf(page)])} style={{textDecoration: 'none', color: 'black'}}>{titles[pages.indexOf(page)]}</Link>
+                }
+            })}
         </StyledHeaderFull>
     )
 }
