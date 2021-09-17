@@ -17,8 +17,8 @@ export default function Header() {
     return (
         <StyledHeaderFull>
             <Link to='/' style={{color: 'black'}}>Home</Link>
-            <Link to='/todo' style={{color: 'black'}}>Todo</Link>
             <Link to='/character-sheet' style={{color: 'black'}}>Character Sheet</Link>
+            <Link to='/todo' style={{color: 'black'}}>Todo</Link>
         </StyledHeaderFull>
     )
 }
