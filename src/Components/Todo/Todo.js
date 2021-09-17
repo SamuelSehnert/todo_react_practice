@@ -6,7 +6,84 @@ import EditTask from './EditTask'
 import Pomodoro from './Pomodoro'
 import EditPomodoro from './EditPomodoro'
 
-import './../../Style/Todo.module.css'
+import styled from 'styled-components'
+
+const StyledBackground = styled.div`
+    background-color: #D6FFD0;
+`
+const StyledMainDivision = styled.div`
+    display: flex;
+    justify-content: space-around;
+`
+const StyledButtonSpan = styled.span`
+    display: flex;
+    justify-content: center;
+`
+const StyledButtonNew = styled.button`
+    background-color: #E54A4A;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 100%;
+
+    position:fixed;
+    bottom:0;
+    right: 0;
+
+    cursor: pointer;
+`
+const StyledPomodoro = styled.div`
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+
+    position:fixed;
+    bottom:0;
+    left:0;
+
+    background-color: #E54A4A;
+    color: white;
+`
+const StyledWorkOrBreak = styled.div`
+    font-size: 25px;
+`
+const StyleModalContent = styled.div`
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+`
+const StyledModal = styled.div`
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+`
+const StyledOverlay = styled.div`
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: rgba(49,49,49,0.8);
+`
+
 
 const Todo = () => {
 
@@ -168,39 +245,39 @@ const Todo = () => {
 
     function renderWorkOrBreak(){
         if (allTime[2] === 0){
-            return <div className='work-or-break'><strong>Work</strong></div>
+            return <StyledWorkOrBreak><strong>Work</strong></StyledWorkOrBreak>
         }
         else if (allTime[2] === 1){
-            return <div className='work-or-break'><strong>Break</strong></div>
+            return <StyledWorkOrBreak><strong>Break</strong></StyledWorkOrBreak>
         }
     }
 
     const renderDisplay = (showEditTask) => {
         inCaseNotLoaded();
         return (
-            <div className='background'>
-                <div className='main-division'>
+            <StyledBackground>
+                <StyledMainDivision>
                     <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'not-started', title: 'Not Started'}} data={tasks}></Section></span>
                     <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'in-progress', title: 'In Progress'}} data={tasks}></Section></span>
                     <span><Section exitEditGroup={exitEditGroup} handleSelectedTask={handleSelectedTask} stringData={{id: 'complete', title: 'Complete'}}       data={tasks}></Section></span>
-                </div>
-                <span className='button-span'>
-                    <button className='button-new' onClick={() => createTask()}>New Task</button>
-                    <div className='pomodoro' >{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={(allTime[2] === 0) ? allTime[1] : allTime[0]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} childFunc={childFunc} /></div>
-                </span>
+                </StyledMainDivision>
+                <StyledButtonSpan>
+                    <StyledButtonNew onClick={() => createTask()}>New Task</StyledButtonNew>
+                    <StyledPomodoro>{renderWorkOrBreak()}<Pomodoro currentTime={timeData} secondTime={(allTime[2] === 0) ? allTime[1] : allTime[0]} setshowEditTimer={setshowEditTimer} setTimerGoing={setTimerGoing} timerGoing={timerGoing} nextStage={nextStage} childFunc={childFunc} /></StyledPomodoro>
+                </StyledButtonSpan>
                 {showEditTask && (
-                    <div className='modal'>
-                        <div onClick={() => handleShowEditTask()} className="overlay"></div> {/* essentially the background, click to exit */}
-                        <div className='modal-content'><EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/></div>
-                    </div> 
+                    <StyledModal>
+                        <StyledOverlay onClick={() => handleShowEditTask()}></StyledOverlay> {/* essentially the background, click to exit */}
+                        <StyleModalContent><EditTask exitEditTask={exitEditTask} taskData={selectedTask} exitEditGroup={exitEditGroup} groupData={groups}/></StyleModalContent>
+                    </StyledModal> 
                 )}
                 {showEditTimer && (
-                   <div className='modal'>
-                        <div onClick={() => handleshowEditTimer()} className="overlay"></div> {/* essentially the background, click to exit */}
-                        <div className='modal-content'><EditPomodoro allTimeData={allTime} saveData={saveTimeData}/></div>
-                    </div> 
+                   <StyledModal>
+                        <StyledOverlay onClick={() => handleshowEditTimer()}></StyledOverlay> {/* essentially the background, click to exit */}
+                        <StyleModalContent><EditPomodoro allTimeData={allTime} saveData={saveTimeData}/></StyleModalContent>
+                    </StyledModal> 
                     )}
-            </div>
+            </StyledBackground>
         )
     }
 

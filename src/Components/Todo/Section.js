@@ -2,16 +2,17 @@ import React from 'react'
 import Task from './Task'
 import Group from './Group'
 
-import './../../Style/Section.module.css'
+import styled from 'styled-components'
 
-/* This for the the NOT STARTED, IN PROGRESS, and DONE section
- * Inputs:
- *      data -> JSON object
- */
+const StyledScrollable = styled.div`
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+`
 
 const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
 
-    // const [fullTaskData, setFullTaskData] = useState(parseData());
     var tasks = [];
 
     function parseData(){
@@ -47,7 +48,7 @@ const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
     return(
         <div>
             <h1>{stringData.title}</h1>
-            <div className='scrollable'>
+            <StyledScrollable>
                 {runAtStartInReturn()}
                 {tasks[0].map( task => {
                     return <Task handleSelectedTask={handleSelectedTask} key={task.taskID} taskData={task} />
@@ -59,7 +60,7 @@ const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
                     }
                     return <Group key={tempData.title} handleSelectedTask={handleSelectedTask} exitEditGroup={exitEditGroup} groupData={tempData}/>
                 })}
-            </div>
+            </StyledScrollable>
         </div>
     );
 }

@@ -1,9 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 
-import './../../Style/Pomodoro.module.css'
+import styled from 'styled-components';
 
 import bell from './../../bell.mp3'
+
+const StyledTimes = styled.div`
+    padding: 5px;
+    > * {
+        padding: 5px;
+    }
+`
+const StyledTop = styled.div`
+    font-size: 16px;
+`
+const StyledBot = styled.div`
+    font-size: 12px;
+`
+const StyledButtonSpan = styled.span`
+    display: flex;
+    justify-content: center;
+`
 
 const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage, childFunc}) => {
 
@@ -67,12 +84,12 @@ const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, tim
     }
 
     return(
-        <div className='total'>
-            <div className='times'>
-                <div className='top'>{messageData(currentTime)}</div>
-                <div className='bot'>{messageData(secondTime)}</div>
-            </div>
-            <span className='button-span'>
+        <div>
+            <StyledTimes>
+                <StyledTop>{messageData(currentTime)}</StyledTop>
+                <StyledBot>{messageData(secondTime)}</StyledBot>
+            </StyledTimes>
+            <StyledButtonSpan>
                 {conditionalButtonReturn()}
                 <button onClick={() => { 
                     if (isPaused === true){
@@ -83,7 +100,7 @@ const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, tim
                     // console.log(timerGoing)
                     setshowEditTimer(true) 
                     }}>Edit</button>
-            </span>
+            </StyledButtonSpan>
         </div>
     );
 }

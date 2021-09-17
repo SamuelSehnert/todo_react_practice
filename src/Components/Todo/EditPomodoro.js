@@ -1,6 +1,17 @@
 import React, { useState } from 'react'
 
-import './../../Style/EditPomodoro.module.css'
+import styled from 'styled-components'
+
+const StyledFullSection = styled.div`
+    text-align: center;
+    > * {
+        padding: 10px;
+    }
+`
+const StyledInput = styled.input`
+    text-align: center;
+    width: 4ch;
+`
 
 export default function EditPomodoro({allTimeData, saveData}) {
 
@@ -26,7 +37,7 @@ export default function EditPomodoro({allTimeData, saveData}) {
 
         return (
                 <span>
-                    <span><input className='input' name={mode} defaultValue={minutes} onChange={updateData}></input> : <input className='input' name={mode + 1} defaultValue={seconds} onChange={updateData}></input></span>
+                    <span><StyledInput name={mode} defaultValue={minutes} onChange={updateData}></StyledInput> : <StyledInput name={mode + 1} defaultValue={seconds} onChange={updateData}></StyledInput></span>
                 </span>
                 )
     }
@@ -58,7 +69,7 @@ export default function EditPomodoro({allTimeData, saveData}) {
     }
 
     return (
-        <div className='full-section'>
+        <StyledFullSection>
             <div>
                 <strong>Work Time</strong><br/>
             </div>
@@ -72,6 +83,6 @@ export default function EditPomodoro({allTimeData, saveData}) {
             <div>
                 <button onClick={() => checkSubmissionAndSave()}>Save</button>
             </div>
-        </div>
+        </StyledFullSection>
     )
 }

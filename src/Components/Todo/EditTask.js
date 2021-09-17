@@ -1,6 +1,25 @@
 import React, {useState} from 'react'
 
-import './../../Style/EditTask.module.css'
+import styled from 'styled-components';
+
+const StyledFullSection = styled.div`
+    text-align: center;
+    > * {
+        padding: 10px;
+    }
+`
+const StyledContextInput = styled.textarea`
+    height: 25vh;
+    width: 25vw;
+    font-family: sans-serif;
+    resize: none;
+`
+const StyledTitleInput = styled.input`
+    text-align: center;
+`
+const StyledInvalidSubmission = styled.div`
+    color:orangered;
+`
 
 const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 
@@ -35,7 +54,7 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
     function showGroupForm(showNewGroupForm){
         if (showNewGroupForm){
             return (
-                <div className='fullSection'>
+                <div>
                     <span>
                         <input type='text' name='groupID' onChange={updateGroupData} />
                         <button onClick={() => {
@@ -59,25 +78,25 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
 
     function submissionNotValidReturn(showInvalid){
         if (showInvalid){
-            return (<div className='invalid-submission'>Title and Context must have data!</div>)
+            return (<StyledInvalidSubmission>Title and Context must have data!</StyledInvalidSubmission>)
         }
     }
 
     function groupNotValid(showInvalid){
         if (showInvalid){
-            return (<div className='invalid-submission'>Group can't be empty string</div>) 
+            return (<StyledInvalidSubmission>Group can't be empty string</StyledInvalidSubmission>) 
         }
     }
 
     return(
-        <div className='fullSection'>
+        <StyledFullSection>
             <div>
                 <strong>Title</strong><br/>
-                <input className='title-input' type='text' name='title' onChange={updateTaskData} defaultValue={taskData.title}/>
+                <StyledTitleInput type='text' name='title' onChange={updateTaskData} defaultValue={taskData.title}/>
             </div>
             <div>
                 <strong>Context</strong><br/>
-                <textarea className='context-input' type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
+                <StyledContextInput type='text' name='context' onChange={updateTaskData} defaultValue={taskData.context}/>
             </div>
             {submissionNotValidReturn(showInvalid[0])}
             <div>
@@ -110,7 +129,7 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
                 }
             }}>Save & Close</button>
             <button onClick={() => exitEditTask(newTask, 1)}>Delete Task</button>
-        </div>
+        </StyledFullSection>
     );
 }
 

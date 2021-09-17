@@ -1,6 +1,10 @@
 import React from 'react'
 
-import './../../Style/Task.module.css'
+import styled from 'styled-components'
+
+const StyledClickable = styled.div`
+    cursor: pointer;
+`
 
 const Task = ({handleSelectedTask, taskData}) => {
 
@@ -14,11 +18,11 @@ const Task = ({handleSelectedTask, taskData}) => {
     }
 
     return(
-        <div className='clickable' onClick={() => handleSelectedTask(taskData)}>
+        <StyledClickable onClick={() => handleSelectedTask(taskData)}>
             <strong>{messageText(taskData.title)}</strong>
             <div>{messageText(taskData.context)}</div>
             <br/>
-        </div>
+        </StyledClickable>
     );
 }
 
