@@ -6,7 +6,7 @@ const StyledClickable = styled.div`
     cursor: pointer;
 `
 
-const Task = ({handleSelectedTask, taskData}) => {
+export default function Task ({handleSelectedTask, taskData}) {
 
     function messageText(string){
         if (string.length > 20 ){
@@ -25,5 +25,3 @@ const Task = ({handleSelectedTask, taskData}) => {
         </StyledClickable>
     );
 }
-
-export default Task;

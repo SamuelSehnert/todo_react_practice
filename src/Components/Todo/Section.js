@@ -11,7 +11,7 @@ const StyledScrollable = styled.div`
     text-align: center;
 `
 
-const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
+export default function Section ({handleSelectedTask, data, stringData, exitEditGroup}) {
 
     var tasks = [];
 
@@ -64,5 +64,3 @@ const Section = ({handleSelectedTask, data, stringData, exitEditGroup}) => {
         </div>
     );
 }
-
-export default Section;

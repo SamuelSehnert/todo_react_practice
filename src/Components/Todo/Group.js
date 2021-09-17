@@ -26,7 +26,7 @@ const StyledOverlay = styled.div`
 `
 
 
-const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
+export default function Group ({groupData, handleSelectedTask, exitEditGroup}) {
 
     const [editGroup, setEditGroup] = useState(false);
     const [groupStuff, setGroupStuff] = useState(groupData.title);
@@ -81,5 +81,3 @@ const Group = ({groupData, handleSelectedTask, exitEditGroup}) => {
         </StyledBorder>
     );
 }
-
-export default Group;

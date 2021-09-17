@@ -21,7 +21,7 @@ const StyledInvalidSubmission = styled.div`
     color:orangered;
 `
 
-const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
+export default function EditTask ({exitEditTask, taskData, exitEditGroup, groupData}) {
 
     const [newTask, setNewTask] = useState(taskData);
 
@@ -132,5 +132,3 @@ const EditTask = ({exitEditTask, taskData, exitEditGroup, groupData}) => {
         </StyledFullSection>
     );
 }
-
-export default EditTask;

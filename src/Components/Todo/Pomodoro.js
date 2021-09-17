@@ -22,7 +22,7 @@ const StyledButtonSpan = styled.span`
     justify-content: center;
 `
 
-const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage, childFunc}) => {
+export default function Pomodoro ({currentTime, secondTime, setshowEditTimer, setTimerGoing, timerGoing, nextStage, childFunc}) {
 
     const [isPaused, setIsPaused] = useState(false);
     const [, toggle] = useAudio(bell);
@@ -104,5 +104,3 @@ const Pomodoro = ({currentTime, secondTime, setshowEditTimer, setTimerGoing, tim
         </div>
     );
 }
-
-export default Pomodoro;

@@ -85,7 +85,7 @@ const StyledOverlay = styled.div`
 `
 
 
-const Todo = () => {
+export default function Todo() {
 
     const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
     const [groups, setGroups] = useState(JSON.parse(localStorage.getItem('groups')));
@@ -287,5 +287,3 @@ const Todo = () => {
         </span>
     );
 }
-
-export default Todo;
