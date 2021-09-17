@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, {useState, useEffect, useRef} from 'react'
 import Section from './Section'
 import EditTask from './EditTask'
@@ -24,11 +26,11 @@ const Todo = () => {
 
     const childFunc = useRef();
 
-    var interval;
+    // var interval;
     useEffect(() => {
         if (timerGoing){
             var remove = 0;
-            interval = setInterval(() => {
+            var interval = setInterval(() => {
                 setTimeData((timeData) => timeData - 1)
                 if (timeData - remove === 1) {
                     setTimerGoing(!timerGoing) //sets to false
